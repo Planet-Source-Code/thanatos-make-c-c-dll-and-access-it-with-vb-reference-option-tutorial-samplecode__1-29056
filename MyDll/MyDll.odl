@@ -1,0 +1,57 @@
+// This is the type library for MyDll.dll
+[
+	// Use GUIDGEN.EXE to create the UUID 
+	uuid(368561CC-4E4F-4ccc-9E4C-9F61D814737E),
+	// This helpstring defines how the library will appear in the
+	// References dialog of VB.
+	helpstring("MyDll Sample"),
+	// Assume standard English locale.
+	lcid(0x0409),
+	// Assign a version number
+	version(1.0)
+]
+
+// Start Library definition
+library MyDll
+{
+	// Define an Enumeration to use as Return Code (shown in VB)
+	typedef enum _MyDllRet
+	{	RC_NOK=0,
+		RC_OK=1
+	} MyDllRet;
+
+	// Now define the module that will "declare" your C functions.
+	[
+		helpstring("Sample functions exported by MyDll.dll"),
+		version(1.0),
+		// Give the name of your DLL here.
+		dllname("MyDll.dll")
+	]
+		//Start the Procedure definitions
+	module MyDllFunctions
+	{
+		[
+			// Add a description for your function - this will be
+			// shown in the VB Object Browser.
+			helpstring("Flips a given string."),
+			// Specify ur Function or Procedure Name as an entry point
+			entry("Dll_FlipString")
+		]
+		// Then (re)define ur Function as an Alias for VB
+		// (This Name will be used in VB to call the Function)
+		MyDllRet __stdcall FlipString([in, out] LPSTR sMyString);
+		// With the [in], [out], and [in, out] keywords, u can 
+		// tell the Automation client which direction parameters
+		// need to be passed.
+		// And u can use ur Enumeration Types as Variable Types,
+		// the Enum List will then be shown in VB 
+
+		[
+            helpstring("Multiplies 2 floating variables."),
+            entry("Dll_Multiply")
+		]
+		float __stdcall VarMultiply([in] float Variable1,
+									 [in] float Variable2);
+	} // End of Module
+}; // End of Library
+ 

@@ -1,0 +1,8 @@
+LIBRARY MyDll
+
+DESCRIPTION 'My Sample DLL'
+
+EXPORTS
+	Dll_FlipString
+	Dll_Multiply
+
